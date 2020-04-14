@@ -1,0 +1,32 @@
+.app-container {
+  display: grid;
+}
+
+.add-new-todo {
+  width: 70vw;
+}
+
+.new-todo-input {
+  width: 90%;
+  height: 2vh;
+  margin: 10px;
+  padding: 5px;
+}
+
+.todo-table {
+  width: 70vw;
+}
+
+.todo-item {
+  width: 100%;
+  background-color: #010101;
+}
+
+.todo-item:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.status-true {
+  text-decoration: line-through;
+}
