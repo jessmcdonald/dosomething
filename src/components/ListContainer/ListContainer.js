@@ -1,5 +1,6 @@
 import React from "react";
 import "./ListContainer.css";
+import ItemCounter from "../ItemCounter/ItemCounter";
 
 class ListContainer extends React.Component {
   constructor(props) {
@@ -39,8 +40,8 @@ class ListContainer extends React.Component {
   handleToDoStatusChange = (e) => {
     let updatedList = this.state.items;
     for (let i = 0; i < updatedList.length; i++) {
-      if (updatedList[i].description == e.target.id) {
-        if (updatedList[i].checked == false) {
+      if (updatedList[i].description === e.target.id) {
+        if (updatedList[i].checked === false) {
           updatedList[i].checked = true;
         } else {
           updatedList[i].checked = false;
@@ -53,6 +54,7 @@ class ListContainer extends React.Component {
   render() {
     return (
       <div className="app-container">
+        <ItemCounter items={this.state.items} />
         <h3 className="app-header">What do you want to do?</h3>
         <div className="add-new-todo">
           <input
