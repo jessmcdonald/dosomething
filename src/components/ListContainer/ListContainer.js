@@ -15,13 +15,21 @@ class ListContainer extends React.Component {
   }
 
   addNewTodo = (e) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       let newList = this.state.items.concat({
         description: e.target.value,
         checked: false,
       });
       this.setState({ items: newList });
     }
+  };
+
+  deleteTodo = (e) => {
+    let todelete = e.target.id;
+    let filteredList = this.state.items.filter(function (el) {
+      return el.description !== todelete;
+    });
+    this.setState({ items: filteredList });
   };
 
   handleToDoStatusChange = (event) =>
@@ -34,7 +42,7 @@ class ListContainer extends React.Component {
         <div className="add-new-todo">
           <input
             type="text"
-            placeholder="Type your new todo here.."
+            placeholder="Type your new todo and hit enter.."
             className="new-todo-input"
             onKeyDown={this.addNewTodo}
           ></input>
@@ -54,7 +62,11 @@ class ListContainer extends React.Component {
                     onChange={this.handleToDoStatusChange}
                   />
                 </td>
-                <td>Delete</td>
+                <td>
+                  <button id={item.description} onClick={this.deleteTodo}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
