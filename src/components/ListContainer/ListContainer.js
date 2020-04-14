@@ -36,23 +36,38 @@ class ListContainer extends React.Component {
     this.setState({ items: filteredList });
   };
 
-  handleToDoStatusChange = (event) =>
-    this.setState({ checked: event.target.checked });
+  handleToDoStatusChange = (e) => {
+    let updatedList = this.state.items;
+    for (let i = 0; i < updatedList.length; i++) {
+      if (updatedList[i].description == e.target.id) {
+        if (updatedList[i].checked == false) {
+          updatedList[i].checked = true;
+        } else {
+          updatedList[i].checked = false;
+        }
+      }
+    }
+    this.setState({ items: updatedList });
+  };
 
   render() {
     return (
       <div className="app-container">
-        <h3 className="app-header">Here's what you have to do today:</h3>
+        <h3 className="app-header">What do you want to do?</h3>
         <div className="add-new-todo">
           <input
             type="text"
-            placeholder="Type your new todo and hit enter.."
+            placeholder="Type your new to-do and hit enter.."
             className="new-todo-input"
             onKeyDown={this.addNewTodo}
           ></input>
         </div>
         <table className="todo-table">
           <tbody>
+            <th>Task</th>
+            <th>Completed</th>
+            <th>Delete</th>
+
             {this.state.items.map((item) => (
               <tr
                 className={`status-${item.checked} todo-item`}
@@ -64,6 +79,7 @@ class ListContainer extends React.Component {
                     type="checkbox"
                     checked={item.checked}
                     onChange={this.handleToDoStatusChange}
+                    id={item.description}
                   />
                 </td>
                 <td>

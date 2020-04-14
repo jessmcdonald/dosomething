@@ -8,14 +8,18 @@
 
 .new-todo-input {
   font-size: 2vh;
-  width: 90%;
+  width: 63vw;
   height: 2.5vh;
-  margin: 10px;
-  padding: 5px;
+  margin: 2vw;
+  padding: 1vw;
 }
 
 .todo-table {
   width: 70vw;
+}
+
+th {
+  background-color: #5a4779;
 }
 
 .todo-item {
