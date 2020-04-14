@@ -14,13 +14,17 @@ class ListContainer extends React.Component {
     };
   }
 
+  emptyText(e) {
+    e.target.value = "";
+  }
+
   addNewTodo = (e) => {
     if (e.keyCode === 13) {
       let newList = this.state.items.concat({
         description: e.target.value,
         checked: false,
       });
-      this.setState({ items: newList });
+      this.setState({ items: newList }, this.emptyText(e));
     }
   };
 

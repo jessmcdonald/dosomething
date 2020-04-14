@@ -7,8 +7,9 @@
 }
 
 .new-todo-input {
+  font-size: 2vh;
   width: 90%;
-  height: 2vh;
+  height: 2.5vh;
   margin: 10px;
   padding: 5px;
 }
