@@ -1,6 +1,7 @@
 import React from "react";
 import "./ListContainer.css";
 import ItemCounter from "../ItemCounter/ItemCounter";
+import ToDoModal from "../ToDoModal/ToDoModal";
 
 class ListContainer extends React.Component {
   constructor(props) {
@@ -12,12 +13,16 @@ class ListContainer extends React.Component {
         { description: "bake bread", checked: false },
         { description: "clean kitchen", checked: true },
       ],
+      showModal: false,
+      selectedItem: null,
     };
   }
 
   emptyText(e) {
     e.target.value = "";
   }
+
+  updateCounter() {}
 
   addNewTodo = (e) => {
     if (e.keyCode === 13) {
@@ -35,6 +40,15 @@ class ListContainer extends React.Component {
       return el.description !== todelete;
     });
     this.setState({ items: filteredList });
+  };
+
+  showModal = (e) => {
+    this.setState({ showModal: true });
+    this.setState({ selectedItem: e.target.id });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   handleToDoStatusChange = (e) => {
@@ -65,11 +79,12 @@ class ListContainer extends React.Component {
           ></input>
         </div>
         <table className="todo-table">
-          <tbody>
-            <th>Task</th>
-            <th>Completed</th>
-            <th>Delete</th>
+          <th>Task</th>
+          <th>Completed</th>
+          <th>Details</th>
+          <th>Delete</th>
 
+          <tbody>
             {this.state.items.map((item) => (
               <tr
                 className={`status-${item.checked} todo-item`}
@@ -85,6 +100,11 @@ class ListContainer extends React.Component {
                   />
                 </td>
                 <td>
+                  <button id={item.description} onClick={this.showModal}>
+                    Details
+                  </button>
+                </td>
+                <td>
                   <button id={item.description} onClick={this.deleteTodo}>
                     Delete
                   </button>
@@ -93,6 +113,14 @@ class ListContainer extends React.Component {
             ))}
           </tbody>
         </table>
+        {this.state.showModal ? (
+          <ToDoModal
+            item={this.state.selectedItem}
+            closeModal={this.closeModal}
+          />
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }
